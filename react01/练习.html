@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!-- react的核心模块，支持允许我们书写react相关语法 -->
+		<script src="js/react.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- react支持操作dom相关 -->
+		<script src="js/react-dom.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 支持jsx语法解析器的模块 -->
+		<script src="js/browser.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		
+		<div id="a">
+			
+		</div>
+	</body>
+</html>
+<script type="text/babel">
+	let a = document.getElementById("a");
+	let sl = 1;
+	let dj = 10;
+	let zj = 0;
+	let Second = React.createClass({
+		clickBtn(e){
+			sl+=1;
+			dj = this.refs.one.value;
+			zj = dj*sl;
+			this.setState({
+				sl,
+				zj,
+				dj
+			});
+			console.log(this.refs.one.value);
+		},
+		getInitialState(){
+			return {
+				
+			}
+		},
+		render(){
+			return (<div>
+				<form>
+					<input  ref="one" id=""/>
+					<p>单价：{dj}</p>
+					<p>数量：{sl}</p>
+					<p>总价：{zj}</p>
+					<button onClick={this.clickBtn} type="button">++</button>
+				</form>
+			</div>)
+		}
+	});
+	ReactDOM.render(<Second />,a);
+	//当组件中需要数据时，理论上来说通过提供全局变量，数组，对象，或者该组件中的key提供的值都是可行的，但缺点时当数据发生改变时，使用过该数据源的地方不会重新渲染
+	//解决方法，每一个组件都有一个props和state状态对象，一旦state状态值发生改变，使用过该数据的地方，能够处理页面重新渲染
+	
+</script>
